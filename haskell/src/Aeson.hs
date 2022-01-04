@@ -1,11 +1,9 @@
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE InstanceSigs #-}
+module Aeson where
 
-module Foo where
-
---import GHC.Generics
+import GHC.Generics
 import Data.Aeson
 import Data.Aeson.Types
+import Data.Map.Strict
 
 {-
 encoding/decoding are a 2 steps process:

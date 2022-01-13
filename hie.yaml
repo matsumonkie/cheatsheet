@@ -1,0 +1,7 @@
+cradle:
+  stack:
+    - path: "./environment-provider/src"
+      component: "environment-provider:lib"
+
+    - path: "./environment-provider/test"
+      component: "environment-provider:test:spec"

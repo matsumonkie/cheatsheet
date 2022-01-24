@@ -26,8 +26,8 @@ source-repository head
 library
   exposed-modules:
       Aeson
-      Foo
       Lib
+      OrdEnumAndBounded
   other-modules:
       Paths_cheatsheet
   hs-source-dirs:

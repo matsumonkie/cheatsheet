@@ -6,6 +6,6 @@ packages:
 
 extra-deps:
 #  - aeson-2.0.2.0@sha256:bb41f39762d6f755431097ce0fa88d817108036e7f1c1ec06fd5990230860c76,6343
-  - optics-core-0.4
+  - optics-core-0.4.1
 
 allow-newer: true

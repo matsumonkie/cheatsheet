@@ -10,6 +10,8 @@ main = do
   doctest
     -- NOTE: Keep in sync with package.yaml.
     ( "-XOverloadedStrings"
+      : "-XOverloadedLabels"
+      : "-XAllowAmbiguousTypes"
       : "-XInstanceSigs"
       : "-XDataKinds"
       : "-XScopedTypeVariables"
@@ -22,7 +24,6 @@ main = do
       : "-XFlexibleInstances"
       : "-XTypeApplications"
       : "-XDuplicateRecordFields"
-      : "-XOverloadedLabels"
       : "-XTemplateHaskell"
       : "-XTupleSections"
       : "-XNumericUnderscores"

@@ -5,12 +5,12 @@
 
 packages:
 - completed:
-    hackage: optics-core-0.4@sha256:59e04aebca536bd011ae50c781937f45af4c1456af1eb9fb578f9a69eee293cd,4995
+    hackage: optics-core-0.4.1@sha256:63f5adf60b64415046113face11c913e251f39eba467c5eec8728c9dd113055d,5531
     pantry-tree:
-      size: 5315
-      sha256: 0b8b5824efec35faede5a4c5d7c6f47c6b4708885942f7a7f73c892a5c3c5738
+      size: 5380
+      sha256: 022f809c592cdc32272b3bc01e54964a174d2ecbb3712fd9d3b99274deedd9c9
   original:
-    hackage: optics-core-0.4
+    hackage: optics-core-0.4.1
 snapshots:
 - completed:
     size: 586296

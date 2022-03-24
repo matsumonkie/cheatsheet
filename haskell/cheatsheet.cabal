@@ -27,6 +27,7 @@ library
   exposed-modules:
       Aeson
       Lib
+      Optics
       OrdEnumAndBounded
   other-modules:
       Paths_cheatsheet
@@ -34,6 +35,8 @@ library
       src
   default-extensions:
       OverloadedStrings
+      OverloadedLabels
+      AllowAmbiguousTypes
       InstanceSigs
       DataKinds
       ScopedTypeVariables
@@ -46,7 +49,6 @@ library
       FlexibleInstances
       TypeApplications
       DuplicateRecordFields
-      OverloadedLabels
       TemplateHaskell
       TupleSections
       NumericUnderscores
@@ -59,6 +61,7 @@ library
     , base >=4.7 && <5
     , containers
     , optics
+    , optics-core
     , unordered-containers
   default-language: Haskell2010
 
@@ -70,6 +73,8 @@ executable cheatsheet-exe
       app
   default-extensions:
       OverloadedStrings
+      OverloadedLabels
+      AllowAmbiguousTypes
       InstanceSigs
       DataKinds
       ScopedTypeVariables
@@ -82,7 +87,6 @@ executable cheatsheet-exe
       FlexibleInstances
       TypeApplications
       DuplicateRecordFields
-      OverloadedLabels
       TemplateHaskell
       TupleSections
       NumericUnderscores
@@ -97,6 +101,7 @@ executable cheatsheet-exe
     , cheatsheet
     , containers
     , optics
+    , optics-core
     , unordered-containers
   default-language: Haskell2010
 
@@ -109,6 +114,8 @@ test-suite doctest
       doctest
   default-extensions:
       OverloadedStrings
+      OverloadedLabels
+      AllowAmbiguousTypes
       InstanceSigs
       DataKinds
       ScopedTypeVariables
@@ -121,7 +128,6 @@ test-suite doctest
       FlexibleInstances
       TypeApplications
       DuplicateRecordFields
-      OverloadedLabels
       TemplateHaskell
       TupleSections
       NumericUnderscores
@@ -138,6 +144,7 @@ test-suite doctest
     , containers
     , doctest
     , optics
+    , optics-core
     , unordered-containers
   default-language: Haskell2010
 
@@ -150,6 +157,8 @@ test-suite spec
       test
   default-extensions:
       OverloadedStrings
+      OverloadedLabels
+      AllowAmbiguousTypes
       InstanceSigs
       DataKinds
       ScopedTypeVariables
@@ -162,7 +171,6 @@ test-suite spec
       FlexibleInstances
       TypeApplications
       DuplicateRecordFields
-      OverloadedLabels
       TemplateHaskell
       TupleSections
       NumericUnderscores
@@ -177,5 +185,6 @@ test-suite spec
     , cheatsheet
     , containers
     , optics
+    , optics-core
     , unordered-containers
   default-language: Haskell2010

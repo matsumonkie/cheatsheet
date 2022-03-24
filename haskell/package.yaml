@@ -23,6 +23,7 @@ dependencies:
 - base >= 4.7 && < 5
 - aeson
 - optics
+- optics-core
 - unordered-containers
 - containers
 
@@ -64,8 +65,10 @@ tests:
     - Glob
 
 default-extensions:
-  # NOTE: Keep in sync with ./doctest/DocTest.hs
+  # NOTE: Keep in sync with ./doctest/Spec.hs
   - OverloadedStrings
+  - OverloadedLabels
+  - AllowAmbiguousTypes
   - InstanceSigs
   - DataKinds
   - ScopedTypeVariables
@@ -78,7 +81,6 @@ default-extensions:
   - FlexibleInstances
   - TypeApplications
   - DuplicateRecordFields
-  - OverloadedLabels
   - TemplateHaskell
   - TupleSections
   - NumericUnderscores

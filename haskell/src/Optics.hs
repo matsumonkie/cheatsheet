@@ -8,7 +8,9 @@ module Optics where
 import GHC.Generics (Generic)
 import Optics.Generic
 import Optics.Label
-import Optics.Operators ((^.), (^..))
+import Optics.Operators ((^.), (^..), (^?), (.~))
+import Data.Maybe.Optics (_Just, (%?))
+import qualified Optics.Core.Extras as O
 import Optics.Optic ((%))
 import Optics.Lens (Lens')
 --import Optics.Prism (Prism')
@@ -21,7 +23,7 @@ import Optics.Fold (Fold)
 
 import Data.Function ((&))
 
-import Data.Char (toUpper)
+import Data.Char (toUpper, isUpper)
 
 -- * Manually writting optics
 
@@ -135,3 +137,88 @@ data User2 = User2
 -- folding :: Foldable f => (s -> f a) -> Fold s a
 
 -- polymorphic lens: Lens s t a b = Optic A_Lens NoIx s t a b
+
+
+data A = A
+  { b :: B
+  } deriving (Generic, Show)
+
+data B = B
+  { c :: C
+  } deriving (Generic, Show)
+
+data C = C
+  { d :: Maybe D
+  } deriving (Generic, Show)
+
+data D = D
+  { e :: Maybe E
+  } deriving (Generic, Show)
+
+data E = E
+  { fs :: [F]
+  , gs :: [G]
+  } deriving (Generic, Show)
+
+data F = F
+  { h :: String
+  , i :: String
+  } deriving (Generic, Show)
+
+data G = G
+  { j :: String
+  , k :: String
+  } deriving (Generic, Show)
+
+
+{- |
+
+$setup
+>>> let a = A { b = B { c = C { d = Just D { e = Just E { fs = [F { h = "hey", i = "ho" }], gs = [G { j = "foo", k = "bar" }]}}}}}
+
+>>> a ^.. (#b % #c % #d % _Just % #e % _Just % #fs % O.folded % #h)
+["hey"]
+
+
+(%?) is a shortcut for `% _Just %`
+>>> a ^.. (#b % #c % #d %? #e %? #fs % O.folded % #i)
+["ho"]
+
+>>> a ^.. (#b % #c % #d %? #e %? #fs % O.folded)
+[F {h = "hey", i = "ho"}]
+
+>>> a ^? #b % #c % #d %? #e %? #fs
+Just [F {h = "hey", i = "ho"}]
+
+>>> let b = a & #b % #c % #d %? #e .~ Nothing
+>>> b ^? #b % #c % #d %? #e % _Just
+Nothing
+
+
+`is` or `has` (has :: Is k A_Fold => Optic' k is s a -> s -> Bool) are interesting if you need to check
+if a Maybe is _Just or _Nothing or a Either is a _Left or _Right
+>>> O.is _Just (b ^? #b % #c % #d %? #e)
+True
+
+>>> O.has _Just (b ^? #b % #c % #d %? #e)
+True
+
+
+elemOf :: (Is k A_Fold, Eq a) => Optic' k is s a -> a -> s -> Bool
+>>> let b = a & #b % #c % #d %? #e %? #fs .~ [F {h = "a", i ="b"},F {h = "c", i ="d"},F {h = "e", i ="f"}]
+>>> O.elemOf (#b % #c % #d %? #e %? #fs % O.folded % #h) "a" b
+True
+
+anyOf :: Is k A_Fold => Optic' k is s a -> (a -> Bool) -> s -> Bool
+or
+allOf :: Is k A_Fold => Optic' k is s a -> (a -> Bool) -> s -> Bool
+>>> let b = a & #b % #c % #d %? #e %? #fs .~ [F {h = "a", i ="b"},F {h = "c", i ="d"},F {h = "e", i ="f"}]
+>>> O.allOf (#b % #c % #d %? #e %? #fs % O.folded % #h) (\s -> length s == 1) b
+True
+
+Find the first element matching a predicate
+findOf :: Is k A_Fold => Optic' k is s a -> (a -> Bool) -> s -> Maybe a
+>>> let b = a & #b % #c % #d %? #e %? #fs .~ [F {h = "a", i ="b"},F {h = "c", i ="d"},F {h = "e", i ="f"}]
+>>> O.findOf (#b % #c % #d %? #e %? #fs % O.folded % #h) (\s -> s == "c") b
+Just "c"
+-}

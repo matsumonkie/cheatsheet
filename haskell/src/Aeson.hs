@@ -212,6 +212,7 @@ Just "John"
 object :: [Pair] -> Value -- Pair being a strict tuple (i.e: (a, b))
 (.=)   :: ToJSON v => (strict) Text -> v -> Pair
 
+$ setup
 >>> :{
 let user :: Value
     user = object [ "firstname" .= ("John" :: String)

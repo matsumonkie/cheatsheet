@@ -13,6 +13,7 @@ import Data.Maybe.Optics (_Just, (%?))
 import qualified Optics.Core.Extras as O
 import Optics.Optic ((%))
 import Optics.Lens (Lens')
+import qualified Optics.AffineFold as O
 --import Optics.Prism (Prism')
 import qualified Optics.Lens as O
 --import qualified Optics.Prism as O
@@ -221,4 +222,9 @@ findOf :: Is k A_Fold => Optic' k is s a -> (a -> Bool) -> s -> Maybe a
 >>> let b = a & #b % #c % #d %? #e %? #fs .~ [F {h = "a", i ="b"},F {h = "c", i ="d"},F {h = "e", i ="f"}]
 >>> O.findOf (#b % #c % #d %? #e %? #fs % O.folded % #h) (\s -> s == "c") b
 Just "c"
+
+Filter a specific value
+filtered :: (a -> Bool) -> AffineFold a a
+>>> [1,2,3,4,5] ^.. O.folded % O.filtered (\e -> e > 2)
+[3,4,5]
 -}
